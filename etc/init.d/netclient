@@ -1,0 +1,20 @@
+#!/sbin/openrc-run
+command=/sbin/netclient
+command_args="daemon"
+command_background=true
+pidfile="/var/run/netclient.pid"
+output_log="/var/log/netclient/output.log"
+error_log="/var/log/netclient/error.log"
+name="Netclient Daemon"
+ 
+description="Netclient Daemon"
+
+depend() {
+    need net
+    need localmount
+}
+
+start_pre() {
+    checkpath --directory --owner root:root --mode 0775 \
+        /etc/netclient/config /etc/systemd/system
+}
