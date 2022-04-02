@@ -4,6 +4,19 @@ This repository is designed to make netclient run on Alpine Linux, so that a Pro
 
 ## Pre-requisites
 
+### Container Host setup
+
+If you want to setup netclient in container. Wireguard module need to be loaded on the host.
+```
+# On PVE:
+apt install wireguard
+modprobe wireguard
+# Load the module on boot
+echo "wireguard" >> /etc/modules-load.d/modules.conf
+```
+
+### Dependensies
+
 (For chinese users) Use TUNA mirrors
 ```
 sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
@@ -50,4 +63,5 @@ rc-service netclient start
 Join network
 ```
 netclient join -t <Access Token>
+rc-service netclient restart
 ```
